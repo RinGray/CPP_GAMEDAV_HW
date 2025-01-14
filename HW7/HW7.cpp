@@ -116,7 +116,7 @@ int main()
         std::cout << "Enter rounds number (-1 to quit): ";
         std::cin >> rounds;
         cin.get();
-        if (rounds == '.') {
+        if (rounds == '-') {
             std::cout << "Exit..." << std::endl;
             break;
         }
