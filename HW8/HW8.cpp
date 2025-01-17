@@ -3,82 +3,10 @@
 #include <iomanip>
 #include <cctype>
 
+#include "Func.h"
+#include "Recursion.h"
 using namespace std;
 
-namespace myPi {
-	constexpr double pi = 3.141592653589793;
-}
-using namespace myPi;
-
-int bar(int taskCounter) {
-    std::cout << setw(25) << std::setfill('-') << " (" << taskCounter << ") " << setw(25) << "" << std::endl;
-    return 0;
-}
-
-void counter(int& n, int& positive, int& negative, int& zero, int& number)
-{
-    if (n > 0) {
-        std::cout << "Enter number # " << n << " for calculate: ";
-        std::cin >> number;
-		if (number > 0) {
-			positive++;
-		}
-		else if (number < 0) {
-			negative++;
-		}
-		else {
-			zero++;
-		}
-		counter(--n, positive, negative, zero, number);
-    }
-    
-}
-
-void Validate(int& F) {
-    std::cout << "Enter factorial: ";
-    while (true) {
-
-        std::cin >> F;
-        std::cout << std::endl;
-        if (F > 0) {
-            break;
-        }
-        else
-        {
-            std::cout << "Must be positive, try again: ";
-            continue;
-        }
-    }
-}
-
-void funcFactorial(int F) {// source from HW5.cpp
-
-    int fact = 1;
-    for (int i = 1; i <= F; i++) {
-        fact = fact * i;
-        std::cout << "F" << i << " = " << fact << ", " << endl;
-    }
-}
-
-
-void recursFactorial(int F, int fact = 1, int i = 1)
-{
-	if (i<= F) {
-		fact = fact * i;
-		std::cout << "F" << F << " = " << fact << ", " << endl;
-        recursFactorial(F, fact, ++i);
-	}
-	else {
-		return;
-	}
-}
-
-float getArea(float radius) {
-	return pi * radius * radius;
-}
-float getCircumference(float radius) {
-	return 2 * pi * radius;
-}
 
 int main()
 {
@@ -146,5 +74,34 @@ int main()
     cin.get();
     //++++++++++++++++++++++++++++++++++++++++++++++++++++++ 3)
 
+    // (4 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    bar(++taskCounter);
+
+    int N;
+    std::cout << "Enter natural namber: ";
+    std::cin >> N;
+    std::cout << std::endl;
+	// a.
+    std::cout << "Func invert: " << std::endl;
+    printNaturalNumbersFuncInverse(N);
+    std::cout << std::endl;
+	// b.
+    std::cout << "Func normal: " << std::endl;
+    printNaturalNumbersFunc(N);
+    std::cout << std::endl;
+    // c.
+    std::cout << "Recursion invert: " << std::endl;
+    printNaturalNumbersInverse(N);
+    std::cout << std::endl;
+    // d.
+    std::cout << "Recursion normal: " << std::endl;
+    printNaturalNumbers(N);
+
+    std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "Press Enter..." << std::endl;
+    cin.get();
+    cin.get();
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++ 4)
 }
 
