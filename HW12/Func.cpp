@@ -61,15 +61,29 @@ void printArray(int* arr, int column, int rows) {
     }
 }
 
-void bubbleSort(int arr[], int size) {
-    size = size - 1;
+void bubbleSort(int arr[], int rows, int column = 0, SortingDirection direction = SortingDirection::ByRows) {
     int swap;
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size - i; j++) {
-            if (arr[j] > arr[j + 1]) {
-                swap = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = swap;
+    
+    if (direction == SortingDirection::ByRows) {
+        rows = rows - 1;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < rows - i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    swap = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = swap;
+                }
+            }
+        }
+    }
+    else {
+        for (int i = 0; i < column; i++) {
+            for (int j = 0; j < column - i-1; j++) {
+                if (arr[j * rows] > arr[(j + 1) * rows]) {
+                    swap = arr[j * rows];
+                    arr[j * rows] = arr[(j + 1) * rows];
+                    arr[(j + 1) * rows] = swap;
+                }
             }
         }
     }
@@ -77,22 +91,13 @@ void bubbleSort(int arr[], int size) {
 
 void sort(int* arr, int column, int rows, SortingDirection direction = SortingDirection::ByRows) {
     if (direction == SortingDirection::ByRows) {
-        for (int i = 0; i < column; i++) {
+        for (int i = 1; i < column; i++) {
             bubbleSort(&arr[i * rows], rows);
         }
     }
     else {
-        int swap;
-        for (int k = 0; k < rows; k ++) {
-            for (int i = 0; i < column; i++) {
-                for (int j = 0; j < column - 2; j++) {
-                    if (arr[j * rows + i] > arr[(j + 1) * rows + i]) {
-                        swap = arr[j * rows + i];
-                        arr[j * rows + i] = arr[(j + 1) * rows + i];
-                        arr[(j + 1) * rows + i] = swap;
-                    }
-                }
-            }
+        for (int i = 0; i < rows; i++) {
+            bubbleSort(&arr[i], rows, column, SortingDirection::byColumn);
         }
     }
 }
