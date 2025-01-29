@@ -4,7 +4,7 @@
 using namespace std;
 
 
-namespace myPi {
+namespace myPi { // just for practice
     constexpr double pi = 3.141592653589793;
 }
 using namespace myPi;
@@ -18,14 +18,14 @@ int bar(int taskCounter) {
 
 
 
-void Validate(int& F) {
+int readAndValidate() {
+    int F;
     std::cout << "Enter factorial: ";
     while (true) {
-
         std::cin >> F;
         std::cout << std::endl;
         if (F > 0) {
-            break;
+            return F;
         }
         else
         {
@@ -35,7 +35,7 @@ void Validate(int& F) {
     }
 }
 
-void funcFactorial(int F) {// source from HW5.cpp
+void PrintFuncFactorial(int F) {// source from HW5.cpp
 
     int fact = 1;
     for (int i = 1; i <= F; i++) {

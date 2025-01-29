@@ -2,9 +2,9 @@
 
 int bar(int taskCounter);
 
-void Validate(int& F);
+int readAndValidate();
 
-void funcFactorial(int F);
+void PrintFuncFactorial(int F);
 
 float getArea(float radius);
 

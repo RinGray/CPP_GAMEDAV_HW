@@ -38,13 +38,13 @@ int main()
     // (2 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
     bar(++taskCounter);
     int F;
-	Validate(F);
+	F = readAndValidate();
     std::cout << std::endl;
     std::cout << "Func:" << std::endl;
-	funcFactorial(F);
+	PrintFuncFactorial(F);
     std::cout << std::endl;
     std::cout << "Recursion:" << std::endl;
-	recursFactorial(F);
+	PrintRecursFactorial(F);
 
     std::cout << std::endl;
     std::cout << std::endl;

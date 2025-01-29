@@ -20,12 +20,12 @@ void counter(int& n, int& positive, int& negative, int& zero, int& number)
 }
 
 
-void recursFactorial(int F, int fact = 1, int i = 1)
+void PrintRecursFactorial(int F, int fact = 1, int i = 1)
 {
 	if (i <= F) {
 		fact = fact * i;
 		std::cout << "F" << F << " = " << fact << ", " << endl;
-		recursFactorial(F, fact, ++i);
+		PrintRecursFactorial(F, fact, ++i);
 	}
 	else {
 		return;
