@@ -10,6 +10,7 @@ int bar(int taskCounter) {
 }
 
 void translateArray(int numbers[], int size) {
+
 	for (int i = 0; i < size; i++) {
 		if (numbers[i] > 0) {
 			numbers[i] *= 2;
@@ -28,24 +29,16 @@ void toUppercase(char str[]) {
 	}
 }
 
-
-bool isPalindrom(const char str[], int size) {
-	for (int i = 0; i <= (sizeof(str[size]) / 2); i++) {
-		if (str[i] != str[size - i - 1]) {
+bool isPalindrom(const char str[]) {
+	int lenght = strlen(str);
+	for (int i = 0; i <= (lenght / 2); i++) {
+		if (str[i] != str[lenght - i - 1]) {
 			return false;
 		}
 		else {
 			return true;
 		}
 	}
-}
-
-int returnSize(const char str[]) {
-	int size = 0;
-	for (int i = 0; str[i] != '\0'; i++) {
-		size++;
-	}
-	return size;
 }
 
 void parseStringLetters(const char str[], int& vowelsCount, int& constonantsCount) {
@@ -61,7 +54,7 @@ void parseStringLetters(const char str[], int& vowelsCount, int& constonantsCoun
 }
 
 bool isEqual(const char str1[], const char str2[]) {
-	if (returnSize(str1) == returnSize(str2)) {// need check if string #2 longer
+	if (strlen(str1) == strlen(str2)) {// need check if string #2 longer
 		for (int i = 0; str1[i] != '\0'; i++) {
 			if (str1[i] != str2[i]) {
 				return false;

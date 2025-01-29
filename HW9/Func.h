@@ -1,4 +1,4 @@
-
+#pragma once
 
 
 int bar(int taskCounter);
@@ -7,9 +7,7 @@ void translateArray(int numbers[], int size);
 
 void toUppercase(char str[]);
 
-bool isPalindrom(const char str[], int size);
-
-int returnSize(const char str[]);
+bool isPalindrom(const char str[]);
 
 void parseStringLetters(const char str[], int& vowelsCount, int& constonantsCount);
 

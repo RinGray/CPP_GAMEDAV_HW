@@ -61,7 +61,7 @@ int main()
     std::cout << "Enter string: ";
     std::cin.getline(strPal, 100);
     toUppercase(strPal); // optional?
-    if (isPalindrom(strPal, returnSize(strPal))) {
+    if (isPalindrom(strPal)) {
         std::cout << "It's palindrom" << std::endl;
     }
     else {
