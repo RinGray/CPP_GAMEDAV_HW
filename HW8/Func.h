@@ -4,7 +4,7 @@ int bar(int taskCounter);
 
 int readAndValidate();
 
-void PrintFuncFactorial(int F);
+int FuncFactorial(int F);
 
 float getArea(float radius);
 

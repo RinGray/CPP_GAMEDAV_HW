@@ -40,12 +40,9 @@ int main()
     int F;
 	F = readAndValidate();
     std::cout << std::endl;
-    std::cout << "Func:" << std::endl;
-	PrintFuncFactorial(F);
+    std::cout << "Func:" << FuncFactorial(F) <<std::endl;
     std::cout << std::endl;
-    std::cout << "Recursion:" << std::endl;
-	PrintRecursFactorial(F);
-
+    std::cout << "Recursion:" << RecursFactorial(F) << std::endl;
     std::cout << std::endl;
     std::cout << std::endl;
     std::cout << "Press Enter..." << std::endl;

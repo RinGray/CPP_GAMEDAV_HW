@@ -35,13 +35,13 @@ int readAndValidate() {
     }
 }
 
-void PrintFuncFactorial(int F) {// source from HW5.cpp
+int FuncFactorial(int F) {// source from HW5.cpp
 
     int fact = 1;
-    for (int i = 1; i <= F; i++) {
+    for (int i = 2; i <= F; i++) {
         fact = fact * i;
-        std::cout << "F" << i << " = " << fact << ", " << endl;
     }
+    return fact;
 }
 
 
