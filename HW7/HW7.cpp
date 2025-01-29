@@ -14,66 +14,73 @@ enum class Token
     Scissor = 's',
 };
 
-int calculateResult(Token enteredKey) {
-    std::srand((unsigned int)time(NULL));
+enum class Result
+{
+    Win,
+    Lose,
+    Drow,
+};
+
+Token ComputerResult() {
     const int GeneratingRange = 3;
-    const double GeneratedNum = std::rand() % GeneratingRange + 1;
+    const int GeneratedNum = std::rand() % GeneratingRange + 1;
 #ifdef _DEBUG
     std::cout << "*** RANDOM NUMBER *** // " << GeneratedNum << " // *** RANDOM NUMBER ***" << std::endl;
 #endif // DEBUG
-    if (GeneratedNum == 1) {
+    switch (GeneratedNum)
+    {
+    case 1:
         std::cout << "Computer choice Rock" << std::endl;
-        if (enteredKey == Token::Rock) {
-            return 99;
-        }
-        else {
-            if (enteredKey == Token::Paper) {
-                return 1;
-            }
-            else {
-                return 0;
-            }
-        }
+        return Token::Rock;
+    case 2:
+        std::cout << "Computer choice Paper" << std::endl;
+        return Token::Paper;
+    case 3:
+        std::cout << "Computer choice Scissor" << std::endl;
+        return Token::Scissor;
     }
-    else {
-        if (GeneratedNum == 2) {
-            std::cout << "Computer choice Paper" << std::endl;
-            if (enteredKey == Token::Paper) {
-                return 99;
+}
+
+Result calculateResult(Token enteredKey, Token Computer) {
+    if (enteredKey == Computer) {
+        return Result::Drow;
+    }
+    else
+    {
+        if (enteredKey == Token::Rock) {
+            if (Computer == Token::Paper) {
+                return Result::Lose;
             }
-            else {
-                if (enteredKey == Token::Scissor) {
-                    return 1;
-                }
-                else {
-                    return 0;
-                }
+            if (Computer == Token::Scissor) {
+                return Result::Win;
             }
         }
-        else {
-            std::cout << "Computer choice Scissor" << std::endl;
-            if (enteredKey == Token::Scissor) {
-                return 99;
+        if (enteredKey == Token::Paper) {
+            if (Computer == Token::Scissor) {
+                return Result::Lose;
             }
-            else {
-                if (enteredKey == Token::Rock) {
-                    return 1;
-                }
-                else {
-                    return 0;
-                }
+            if (Computer == Token::Rock) {
+                return Result::Win;
+            }
+        }
+        if (enteredKey == Token::Scissor) {
+            if (Computer == Token::Rock) {
+                return Result::Lose;
+            }
+            if (Computer == Token::Paper) {
+                return Result::Win;
             }
         }
     }
 }
 
 
-int message(int r) {
-    if (r == 0) {
+void message(Result r) {
+    if (r == Result::Lose) {
         std::cout << "/--Computer Win--/" << std::endl;
     }
     else {
-        if (r == 1) {
+        if (r == Result::Win) {
             std::cout << "/++You Win++/" << std::endl;
         }
         else {
@@ -81,12 +88,13 @@ int message(int r) {
         }
     }
     std::cout << std::endl;
-    return 0;
 }
 
 int main()
 {
-    int r, wins, losses, draws;
+    std::srand((unsigned int)time(NULL));
+
+    int wins, losses, draws;
     char rounds, k;
     std::cout << "Welcom to game" << std::endl;
     while (true) {
@@ -132,16 +140,16 @@ int main()
                         losses++;
                         continue;
                     }
-                    r = calculateResult(key);
+                    Result r = calculateResult(key, ComputerResult());
                     message(r);
                     switch (r) {
-                    case (0):
+                    case (Result::Lose):
                         losses++;
                         break;
-                    case (1):
+                    case (Result::Win):
                         wins++;
                         break;
-                    case (99):
+                    case (Result::Drow):
                         draws++;
                     }
                 }
