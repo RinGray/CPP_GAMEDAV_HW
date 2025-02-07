@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cctype>
+#include <algorithm>
 #include "Student.h"
 using namespace std;
 
@@ -11,12 +12,17 @@ int bar(int taskCounter) {
 }
 
 int averageRating(Student& student) {
-    int avarage = 0;
-    for (int i = 0; i < static_cast<int>(size(student.marks)); i++) {
-        avarage += student.marks[i];
+    if (student.name == nullptr || student.name == "") {
+        return 0;
     }
-    avarage /= static_cast<int>(size(student.marks));
-    return avarage;
+    else {
+        int avarage = 0;
+        for (int i = 0; i < static_cast<int>(size(student.marks)); i++) {
+            avarage += student.marks[i];
+        }
+        avarage /= static_cast<int>(size(student.marks));
+        return avarage;
+    }
 }
 
 void printInfo(Student& student) {
@@ -57,10 +63,7 @@ void printInfo(Student studentArray[], int totalStudents = 1) {
 Student* BestStudent(Student studentArray[], int totalStudents) {
     int bestAvarageMark = averageRating(studentArray[0]), bestStudyPointer = 0;
     for (int i = 1; i < totalStudents; i++) {
-        if (studentArray[i].name == nullptr || studentArray[i].name == "") {
-            std::cout << "Student is not defined" << std::endl;
-        }
-        else {
+        if (studentArray[i].name != nullptr || studentArray[i].name != "") {
             if (averageRating(studentArray[i]) > bestAvarageMark) {
                 bestAvarageMark = averageRating(studentArray[i]);
                 bestStudyPointer = i;
@@ -73,14 +76,24 @@ Student* BestStudent(Student studentArray[], int totalStudents) {
 int TheBestStudents(Student studentArray[], int totalStudents = 1, int N = 75) {
     int total = 0;
     for (int i = 0; i < totalStudents; i++) {
-        if (studentArray[i].name == nullptr || studentArray[i].name == "") {
-            std::cout << "Student is not defined" << std::endl;
-        }
-        else {
+        if (studentArray[i].name != nullptr || studentArray[i].name != "") {
             if (averageRating(studentArray[i]) >= N) {
                 total++;
             }
         }
     }
     return total;
+}
+
+bool CompareByMarks(const Student& st1, const Student& st2) {
+    return averageRating(const_cast<Student&>(st1)) > averageRating(const_cast<Student&>(st2));
+}
+
+
+void getBestStudents(Student* inStudents, unsigned inSize, Student* outStudents, unsigned& outSize, unsigned percent) {
+    outSize = percent * inSize / 100;
+    for (unsigned i = 0; i < inSize; i++) {
+        outStudents[i] = inStudents[i];
+    }
+    std::sort(outStudents, outStudents + inSize, CompareByMarks);
 }
