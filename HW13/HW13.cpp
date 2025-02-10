@@ -24,7 +24,7 @@ string wordThreeOutput[] = { "*e***" , "e****", "**EA*", "S*a**" , "S*Ep*", "SPE
 string database[] = { "HELLO" , "COCON", "SPEAK" };
 #endif
 
-enum class GameEnd {
+enum class GameEnd { ////////////////////////////////////////////////////////////////////
     Win,
     Defeat
 };
@@ -106,7 +106,7 @@ void clearConsole() {
 #endif
 }
 
-#ifdef _DEBUG
+#ifdef _DEBUG 
 void testCase(string& maskOfSymbol, string TestCase) {
     if (maskOfSymbol != TestCase) {
         std::cout << "!!!ERROR!!!" << maskOfSymbol << " != " << TestCase << " !!!!!!!!!!!!!!!!!!!!!!!! " << endl;
@@ -121,22 +121,6 @@ void testCase(string& maskOfSymbol, string TestCase) {
 int SwitchSearchWord = 0;
 #endif
 
-void writeFile(const char* fileName) {
-    std::fstream file;
-    file.open(fileName, std::ios::out);
-
-    if (!file) {
-        std::cout << "File not created!\n";
-    }
-    else {
-        //file<< database;
-        for (const auto& word : database) {
-            
-            file << word << std::endl;
-        }
-    }
-    file.close();
-}
 
 bool MainMenu(string& searchedWord, bool& isGameActive) {
 
@@ -154,6 +138,7 @@ bool MainMenu(string& searchedWord, bool& isGameActive) {
         return false;
     case GameMenu::WordleOfTheDay:
         std::cout << "Wordle of the day:" << endl;
+        
         searchedWord = getRandomWord();
         isGameActive = true;
         return false;
@@ -233,7 +218,9 @@ void GameStart(string& searchedWord) {
                 switch (SwitchSearchWord + 1)
                 {
                 default:
-                    std::cout << "Incorrect test case" << std::endl;
+                    std::cout << "!!!Incorrect test case!!!" << std::endl;
+                    cin.get();
+                    cin.get();
                     break;
                 case 1:
                     testCase(maskOfSymbol, wordOneOutput[countOfTry - 1]);
@@ -285,23 +272,56 @@ void GameStart(string& searchedWord) {
     }
 }
 
+void writeFile(const char* fileName, char lineToWrite) {
+    std::fstream file;
+    file.open(fileName, std::ios::out);
+
+    if (!file) {
+        std::cout << "File not created!\n";
+    }
+    else {/*
+        //file<< database;
+        for (const auto& word : lineToWrite) {
+
+            file << word << std::endl;
+        }*/
+        file << lineToWrite;
+    }
+    file.close();
+}
 
 
+#include <sstream>
+
+// Existing code...
+
+void writeFile(const char* fileName, const std::string& todayDate) {
+    std::fstream file;
+    file.open(fileName, std::ios::out);
+
+    if (!file) {
+        std::cout << "File not created!\n";
+    }
+    else {
+        file << todayDate;
+        file << " // ";
+    }
+    file.close();
+}
 
 int main()
 {
-    //using namespace std::chrono;
-    //using namespace date;
-    //auto now = system_clock::now();
-    //auto localTime = floor<days>(now);
+    // Existing code...
+    std::cout << "Дарова ";
     std::time_t now = std::time(nullptr);
     std::tm localTime;
     localtime_s(&localTime, &now);
     std::cout << "Date: " << std::put_time(&localTime, "%Y %m %d") << std::endl;
-    
 
-    writeFile("NewFile.txt");
-    
+    std::ostringstream oss;
+    oss << std::put_time(&localTime, "%Y %m %d");
+    writeFile("NewFile.txt", oss.str());
+
     std::srand((unsigned int)time(NULL));
     string searchedWord;
     bool Exit = false, isGameActive = false;
