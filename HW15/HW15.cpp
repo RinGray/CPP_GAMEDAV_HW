@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <iomanip>
 #include <cctype>
+#include <vector>
 #include "Func.h"
 #include "Student.h"
 using namespace std;
@@ -79,12 +80,10 @@ int main()
     std::cout << std::endl;
 
     unsigned N=30, outSize;
-    Student* studentOut = new Student[10];
+    std::vector<Student> studentOut(10);
     getBestStudents(students,10, studentOut, outSize, N);
-    printInfo(studentOut, outSize);
-
-    delete[] studentOut;
-
+    printInfoV(studentOut, outSize);
+    
 
     std::cout << std::endl;
     std::cout << std::endl;
